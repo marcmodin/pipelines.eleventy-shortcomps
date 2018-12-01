@@ -5,6 +5,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
+    "dry": "eleventy --dry-run",
     "debug": "DEBUG=Eleventy* eleventy"
   },
   "repository": {

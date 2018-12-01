@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 pool:
-  vmImage: "Hosted Windows Container"
+  vmImage: "ubuntu-16.04"
 
 steps:
   - task: NodeTool@0
@@ -16,5 +16,5 @@ steps:
       npm install --save-dev
     displayName: "npm install"
   - script: |
-      npx run build
+      npm run build
     displayName: "run build"

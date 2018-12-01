@@ -14,5 +14,5 @@ steps:
 
 - script: |
     npm install --save-dev
-    npx build
+    npx run build
   displayName: 'npm install, run build'

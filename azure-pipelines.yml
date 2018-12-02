@@ -24,8 +24,8 @@ steps:
     displayName: "run build"
     
   - script: |
+     git add . 
      git commit -a 
-     git push origin HEAD:master
     displayName: "push back to github"   
   
   - task: CopyFiles@2

@@ -19,6 +19,11 @@ steps:
   - script: |
       npm run build
     displayName: "run build"
+    
+  - script: |
+     git commit -a 
+     git push origin
+    displayName: "push back to github"   
   
 #   - task: CopyFiles@2
 #     displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'

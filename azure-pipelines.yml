@@ -7,8 +7,6 @@ pool:
   vmImage: "ubuntu-16.04"
 
 steps:
-  - checkout: self
-    persistCredentials: true  
 
   - task: NodeTool@0
     inputs:

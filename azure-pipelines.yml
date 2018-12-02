@@ -15,6 +15,7 @@ steps:
   - script: |
       npm install --save-dev
     displayName: "npm install"
+    
   - script: |
       npm run build
     displayName: "run build"
@@ -22,15 +23,15 @@ steps:
   - checkout: self
     persistCredentials: true  
   
-  - task: CopyFiles@2
-    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)'
-      Contents: |
-        **/*
-        !node_modules/**/*
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+#   - task: CopyFiles@2
+#     displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+#     inputs:
+#       SourceFolder: '$(Build.SourcesDirectory)'
+#       Contents: |
+#         **/*
+#         !node_modules/**/*
+#       TargetFolder: '$(Build.ArtifactStagingDirectory)'
       
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#   - task: PublishBuildArtifacts@1
+#     inputs:
+#       PathtoPublish: '$(Build.ArtifactStagingDirectory)'

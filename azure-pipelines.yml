@@ -18,9 +18,6 @@ steps:
   - script: |
       npm run build
     displayName: "run build"
-        
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish end to end test artifact'
     inputs:
-      pathtoPublish: '$(Build.ArtifactStagingDirectory)/docs'
-      artifactName: docs
+      PathtoPublish: '$(System.DefaultWorkingDirectory)'

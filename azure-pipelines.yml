@@ -19,9 +19,6 @@ steps:
   - script: |
       npm run build
     displayName: "run build"
-    
-  - checkout: self
-    persistCredentials: true  
   
 #   - task: CopyFiles@2
 #     displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
@@ -35,3 +32,6 @@ steps:
 #   - task: PublishBuildArtifacts@1
 #     inputs:
 #       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+
+  - checkout: self
+    persistCredentials: true  

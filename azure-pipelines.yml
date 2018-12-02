@@ -29,6 +29,6 @@ steps:
         !node_modules/**/*
       TargetFolder: '$(Build.ArtifactStagingDirectory)'
       
-#   - task: PublishBuildArtifacts@1
-#     inputs:
-#       PathtoPublish: '$(System.DefaultWorkingDirectory)'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(System.DefaultWorkingDirectory)'

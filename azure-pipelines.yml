@@ -19,11 +19,8 @@ steps:
       npm run build
     displayName: "run build"
         
-  - task: CopyFiles@2
+ - task: PublishBuildArtifacts@1
+    displayName: 'Publish end to end test artifact'
     inputs:
-      contents: _buildOutput\**
-      targetFolder: $(Build.ArtifactStagingDirectory)
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathtoPublish: $(Build.ArtifactStagingDirectory)
-      artifactName: container
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)/docs'
+      artifactName: docs

@@ -33,5 +33,5 @@ steps:
 #     inputs:
 #       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 
-  - checkout: self
-    persistCredentials: true  
+#   - checkout: self
+#     persistCredentials: true  

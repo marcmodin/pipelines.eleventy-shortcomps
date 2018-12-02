@@ -28,18 +28,18 @@ steps:
      git push origin HEAD:master
     displayName: "push back to github"   
   
-#   - task: CopyFiles@2
-#     displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-#     inputs:
-#       SourceFolder: '$(Build.SourcesDirectory)'
-#       Contents: |
-#         **/*
-#         !node_modules/**/*
-#       TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: |
+        **/*
+        !node_modules/**/*
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
       
-#   - task: PublishBuildArtifacts@1
-#     inputs:
-#       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
 
-#   - checkout: self
-#     persistCredentials: true  
+  - checkout: self
+    persistCredentials: true  

@@ -20,7 +20,7 @@ steps:
     displayName: "run build"
     
   - checkout: self
-  persistCredentials: true  
+    persistCredentials: true  
   
   - task: CopyFiles@2
     displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'

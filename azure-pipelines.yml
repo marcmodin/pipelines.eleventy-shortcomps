@@ -18,6 +18,17 @@ steps:
   - script: |
       npm run build
     displayName: "run build"
-  - task: PublishBuildArtifacts@1
+    
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
     inputs:
-      PathtoPublish: '$(System.DefaultWorkingDirectory)'
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: |
+        **/*
+        !.git/**/*
+        !node_modules/
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      
+#   - task: PublishBuildArtifacts@1
+#     inputs:
+#       PathtoPublish: '$(System.DefaultWorkingDirectory)'

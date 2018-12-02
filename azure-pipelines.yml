@@ -22,7 +22,7 @@ steps:
     
   - script: |
      git commit -a 
-     git push origin
+     git push origin HEAD:master
     displayName: "push back to github"   
   
 #   - task: CopyFiles@2

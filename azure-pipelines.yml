@@ -25,9 +25,9 @@ steps:
       echo This is a script that could use $SYSTEM_ACCESSTOKEN
       git config user.name "marc modin"
       git remote -v
-      git add -A
-      git commit --allow-empty -a -m '$(System.PullRequest.SourceBranch)'
-      git push origin HEAD:master
+      git branch
+      echo $(System.PullRequest.SourceBranch)
+      echo $(Build.Repository.Name)
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     

@@ -25,35 +25,22 @@ steps:
       npm run build
     displayName: "run build"
   
-  - task: CopyFiles@2
-    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
-    inputs:
-      SourceFolder: '$(Build.SourcesDirectory)'
-      Contents: |
-        **/*
-        !node_modules/**/*
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-
-- bash: | 
+  - bash: | 
       echo "check git settings"
       echo build dir $(Build.Repository.LocalPath)
       echo build srouce dir : $(Build.SourcesDirectory)
       echo staging dir: $(Build.StagingDirectory)
-      
+      cd $(Build.StagingDirectory)
+      dir
       git status
       #git config user.name "marc modin"
 
       echo "the branch from build :" $(Build.SourceBranchName)
-      git checkout $(Build.SourceBranchName)
+      #git checkout $(Build.SourceBranchName)
       #git add .
       #git commit -a --allow-empty -m '$(Build.SourceBranchName)'
       
       echo check current branch 
-      git branch
       #git branch build
       #git checkout build
       echo about to push to $(Build.Repository.Name)
@@ -62,3 +49,16 @@ steps:
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+    inputs:
+      SourceFolder: '$(Build.SourcesDirectory)'
+      Contents: |
+        **/*
+        !node_modules/**/*
+      TargetFolder: '$(Build.ArtifactStagingDirectory)'
+      
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+

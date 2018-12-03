@@ -25,11 +25,13 @@ steps:
       echo This is a script that could use $SYSTEM_ACCESSTOKEN
       git config user.name "marc modin"
       git remote -v
-      git branch build 5bd1bb7
+      git branch build
+      git checkout build
       git add .
       git commit -a --allow-empty -m '$(Build.SourceBranchName)'
-      git checkout build
-    
+      echo mergin branches
+      git merge $(Build.SourceBranch)
+      echo check current branch 
       git branch
       echo about to push to  > $(Build.Repository.Name)
       git push --set-upstream origin build

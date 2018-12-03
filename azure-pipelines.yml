@@ -25,7 +25,7 @@ steps:
       echo This is a script that could use $SYSTEM_ACCESSTOKEN
       git config user.name "marc modin"
       git add -A
-      git commit --allow-empty -a -m '$(System.PullRequest.SourceBranch)'
+      #git commit --allow-empty -a -m '$(System.PullRequest.SourceBranch)'
       git status
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)

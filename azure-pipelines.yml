@@ -24,24 +24,11 @@ steps:
   - script: |
       npm run build
     displayName: "run build"
-
-  - task: CopyFiles@2
-    displayName: "Copy Files to: $(Build.ArtifactStagingDirectory)"
-    inputs:
-      SourceFolder: "$(Build.SourcesDirectory)"
-      Contents: |
-        *
-        **/*
-        !node_modules/**/*
-      TargetFolder: "$(Build.ArtifactStagingDirectory)"
-
-  - task: PublishBuildArtifacts@1
-    inputs:
-      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-
+    
   - bash: |
       echo "check git settings"
       echo build dir $(Build.Repository.LocalPath)
+      dir
       echo build srouce dir : $(Build.SourcesDirectory)
       echo staging dir: $(Build.StagingDirectory)
 
@@ -65,3 +52,18 @@ steps:
 
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+      
+#   - task: CopyFiles@2
+#     displayName: "Copy Files to: $(Build.ArtifactStagingDirectory)"
+#     inputs:
+#       SourceFolder: "$(Build.SourcesDirectory)"
+#       Contents: |
+#         *
+#         **/*
+#         !node_modules/**/*
+#       TargetFolder: "$(Build.ArtifactStagingDirectory)"
+
+#   - task: PublishBuildArtifacts@1
+#     inputs:
+#       PathtoPublish: "$(Build.ArtifactStagingDirectory)"
+

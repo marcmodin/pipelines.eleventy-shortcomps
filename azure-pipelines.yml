@@ -24,6 +24,7 @@ steps:
   - bash: | 
       echo This is a script that could use $SYSTEM_ACCESSTOKEN
       git config user.name "marc modin"
+      git remote -v
       git add -A
       #git commit --allow-empty -a -m '$(System.PullRequest.SourceBranch)'
       git status

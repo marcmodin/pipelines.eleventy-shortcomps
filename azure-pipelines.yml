@@ -54,6 +54,7 @@ steps:
     inputs:
       SourceFolder: '$(Build.SourcesDirectory)'
       Contents: |
+        *
         **/*
         !node_modules/**/*
       TargetFolder: '$(Build.ArtifactStagingDirectory)'

@@ -32,9 +32,10 @@ steps:
       git commit -a --allow-empty -m '$(Build.SourceBranchName)'
 
       echo check current branch 
-      git branch
+      git branch build
+      git checkout build
       echo about to push to $(Build.Repository.Name)
-      git push --set-upstream origin HEAD:master
+      git push --set-upstream origin HEAD:build
     
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)

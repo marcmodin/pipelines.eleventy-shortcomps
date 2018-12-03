@@ -33,8 +33,8 @@ steps:
 
       echo check current branch 
       git branch
-      echo about to push to  > $(Build.Repository.Name)
-      git push --set-upstream origin build
+      echo about to push to $(Build.Repository.Name)
+      git push --set-upstream origin HEAD:master
     
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)

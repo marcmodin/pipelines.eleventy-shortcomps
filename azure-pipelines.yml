@@ -38,11 +38,12 @@ steps:
       git checkout -b build
       
       echo add all new files to branch
-      git stash
+      git add -A
       
       echo git fetch and diff 
-      git fetch
       git checkout master
+      git pull origin
+      
       echo fething from remote to check diff
       git diff
       git status

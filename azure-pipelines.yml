@@ -26,25 +26,28 @@ steps:
     displayName: "run build"
     
   - bash: |
+      # git settings
       echo "check git settings"
-      echo build dir $(Build.Repository.LocalPath)
+      git config user.name "marc modin"
+      
+      # Build Sources Directory is /home/vsts/work/1/s
+      echo here we should stage docs at: $(Build.Repository.LocalPath)
+      echo build dir is at : $(Build.SourcesDirectory)
       dir
-      echo build srouce dir : $(Build.SourcesDirectory)
-      echo staging dir: $(Build.StagingDirectory)
-
-      #git config user.name "marc modin"
-
-      echo "the branch from build :" $(Build.SourceBranchName)
+      echo creating a new build branch
+      git checkout -b build
+      
+      echo add all new files to branch
+      git stash
+      
+      echo git fetch and diff 
+      git fetch
       git checkout master
       echo fething from remote to check diff
-      git checkout checksum
+      git diff
       git status
-      #git commit -a --allow-empty -m '$(Build.SourceBranchName)'
+      git commit -a --allow-empty -m 'committing build'
 
-      echo check current branch 
-      git checkout master
-      echo "status :"
-      git status
       #git branch build
       #git checkout build
       #echo about to push to $(Build.Repository.Name)

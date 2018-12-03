@@ -22,19 +22,21 @@ steps:
     displayName: "run build"
   
   - bash: | 
-      echo This is a script that could use $SYSTEM_ACCESSTOKEN
+      echo "check git settings"
       git config user.name "marc modin"
+      echo "this is the remote"
       git remote -v
-      git branch build
-      git checkout build
+      echo "the branch from build :" $(Build.SourceBranch)
       git add .
       git commit -a --allow-empty -m '$(Build.SourceBranchName)'
-      echo mergin branches
-      git merge $(Build.SourceBranch)
+      echo "merging branches"
+      git checkout $(Build.SourceBranch)
+      
       echo check current branch 
       git branch
       echo about to push to  > $(Build.Repository.Name)
-      git push --set-upstream origin build
+      #git push --set-upstream origin build
+    
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     

@@ -26,10 +26,13 @@ steps:
       git config user.name "marc modin"
       git remote -v
       git branch
+      git add .
+      git commit -a --allow-empty -m '$(Build.SourceBranchName)'
       git checkout master
       git merge $(Build.SourceBranchName)
       git branch
       echo $(Build.Repository.Name)
+      git push origin
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     

@@ -2,13 +2,9 @@
 # Build a Node.js project.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-# Set variables once
-variables:
-  vm: "ubuntu-16.04"
-  gituser: "marc modin"
-  
+ 
 pool:
-  vmImage: $(vm)
+  vmImage: "ubuntu-16.04"
 
 steps:
 
@@ -27,7 +23,7 @@ steps:
   
   - bash: | 
       echo This is a script that could use $SYSTEM_ACCESSTOKEN
-      git config user.name "$(gituser)"
+      git config user.name "marc modin"
       git add -A
       git commit --allow-empty -a -m '$(System.PullRequest.SourceBranch)'
       git status

@@ -25,14 +25,14 @@ steps:
       echo This is a script that could use $SYSTEM_ACCESSTOKEN
       git config user.name "marc modin"
       git remote -v
-      git branch
+      git branch build
       git add .
       git commit -a --allow-empty -m '$(Build.SourceBranchName)'
-      git checkout master
+      git checkout build
       git merge $(Build.SourceBranchName)
       git branch
       echo $(Build.Repository.Name)
-      git push origin
+      git push
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     

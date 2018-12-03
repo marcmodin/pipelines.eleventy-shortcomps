@@ -26,8 +26,8 @@ steps:
       git config user.name "marc modin"
       git remote -v
       git add -A
-      #git commit --allow-empty -a -m '$(System.PullRequest.SourceBranch)'
-      git status
+      git commit --allow-empty -a -m '$(System.PullRequest.SourceBranch)'
+      git push origin HEAD:master
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
     

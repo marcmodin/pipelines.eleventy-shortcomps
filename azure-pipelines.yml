@@ -4,8 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 # Set variables once
 variables:
-  vm: ubuntu-16.04
-  gituser: marc modin
+  vm: "ubuntu-16.04"
+  gituser: "marc modin"
   
 pool:
   vmImage: $(vm)

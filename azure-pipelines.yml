@@ -2,7 +2,9 @@
 # Build a Node.js project.
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
- 
+trigger:
+- master
+
 pool:
   vmImage: "ubuntu-16.04"
 
@@ -25,20 +27,22 @@ steps:
   
   - bash: | 
       echo "check git settings"
-      git config user.name "marc modin"
-      echo "this is the remote"
-      git remote -v
+      echo build dir $(Build.Repository.LocalPath)
+      echo build srouce dir : $(Build.SourcesDirectory)
+      echo staging dir: $(Build.StagingDirectory)
+      
+      #git config user.name "marc modin"
+
       echo "the branch from build :" $(Build.SourceBranchName)
-      git checkout $(Build.SourceBranchName)
-      git add .
-      git commit -a --allow-empty -m '$(Build.SourceBranchName)'
-      echo "check tree"
-      git ls-files -u
+      #git checkout $(Build.SourceBranchName)
+      #git add .
+      #git commit -a --allow-empty -m '$(Build.SourceBranchName)'
+      
       echo check current branch 
-      git branch build
-      git checkout build
+      #git branch build
+      #git checkout build
       echo about to push to $(Build.Repository.Name)
-      git push --set-upstream origin HEAD:build
+      #git push --set-upstream origin HEAD:build
     
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)

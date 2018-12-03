@@ -45,20 +45,22 @@ steps:
       echo build srouce dir : $(Build.SourcesDirectory)
       echo staging dir: $(Build.StagingDirectory)
 
-      git status
       #git config user.name "marc modin"
 
       echo "the branch from build :" $(Build.SourceBranchName)
-      git checkout $(Build.SourceBranchName)
-      git stash
+      git checkout master
+      echo fething from remote to check diff
+      git checkout checksum
+      git status
       #git commit -a --allow-empty -m '$(Build.SourceBranchName)'
 
       echo check current branch 
       git checkout master
-      git ls-a -a
+      echo "status :"
+      git status
       #git branch build
       #git checkout build
-      echo about to push to $(Build.Repository.Name)
+      #echo about to push to $(Build.Repository.Name)
       #git push --set-upstream origin HEAD:build
 
     env:

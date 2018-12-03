@@ -31,7 +31,8 @@ steps:
       echo build srouce dir : $(Build.SourcesDirectory)
       echo staging dir: $(Build.StagingDirectory)
       cd $(Build.StagingDirectory)
-      ls
+      dir
+      git status
       #git config user.name "marc modin"
 
       echo "the branch from build :" $(Build.SourceBranchName)

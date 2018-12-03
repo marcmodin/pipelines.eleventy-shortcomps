@@ -26,11 +26,11 @@ steps:
       git config user.name "marc modin"
       echo "this is the remote"
       git remote -v
-      echo "the branch from build :" $(Build.SourceBranch)
+      echo "the branch from build :" $(Build.SourceBranchName)
       git add .
       git commit -a --allow-empty -m '$(Build.SourceBranchName)'
       echo "merging branches"
-      git checkout $(Build.SourceBranch)
+      git checkout $(Build.SourceBranchName)
       
       echo check current branch 
       git branch

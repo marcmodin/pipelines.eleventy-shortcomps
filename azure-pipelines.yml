@@ -29,7 +29,8 @@ steps:
       # git settings
       echo "check git settings"
       git config user.name "marc modin"
-      
+      echo fetch from origin again
+      git fetch
       # Build Sources Directory is /home/vsts/work/1/s
       echo here we should stage docs at: $(Build.Repository.LocalPath)
       echo build dir is at : $(Build.SourcesDirectory)
@@ -39,20 +40,20 @@ steps:
       
       echo add all new files to branch
       git add -A
+      git commit -a --allow-empty -m 'committing build'
       
       echo git fetch and diff 
-      git checkout master
-      git pull origin
       
       echo fething from remote to check diff
       git diff
       git status
-      git commit -a --allow-empty -m 'committing build'
+      
 
       #git branch build
       #git checkout build
       #echo about to push to $(Build.Repository.Name)
-      #git push --set-upstream origin HEAD:build
+      git push --set-upstream origin HEAD:build
+      git checkout master
 
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)

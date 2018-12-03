@@ -3,7 +3,7 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 trigger:
-- master
+  - master
 
 pool:
   vmImage: "ubuntu-16.04"
@@ -11,7 +11,7 @@ pool:
 steps:
   - checkout: self
     persistCredentials: true
-    
+
   - task: NodeTool@0
     inputs:
       versionSpec: "9.x"
@@ -20,46 +20,46 @@ steps:
   - script: |
       npm install --save-dev
     displayName: "npm install"
-    
+
   - script: |
       npm run build
     displayName: "run build"
-  
-  - bash: | 
-      echo "check git settings"
-      echo build dir $(Build.Repository.LocalPath)
-      echo build srouce dir : $(Build.SourcesDirectory)
-      echo staging dir: $(Build.StagingDirectory)
-      cd $(Build.StagingDirectory)
-      dir
-      git status
-      #git config user.name "marc modin"
 
-      echo "the branch from build :" $(Build.SourceBranchName)
-      #git checkout $(Build.SourceBranchName)
-      #git add .
-      #git commit -a --allow-empty -m '$(Build.SourceBranchName)'
-      
-      echo check current branch 
-      #git branch build
-      #git checkout build
-      echo about to push to $(Build.Repository.Name)
-      #git push --set-upstream origin HEAD:build
-    
-    env:
-      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-    
   - task: CopyFiles@2
-    displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+    displayName: "Copy Files to: $(Build.ArtifactStagingDirectory)"
     inputs:
-      SourceFolder: '$(Build.SourcesDirectory)'
+      SourceFolder: "$(Build.SourcesDirectory)"
       Contents: |
         *
         **/*
         !node_modules/**/*
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'
-      
+      TargetFolder: "$(Build.ArtifactStagingDirectory)"
+
   - task: PublishBuildArtifacts@1
     inputs:
-      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      PathtoPublish: "$(Build.ArtifactStagingDirectory)"
 
+  - bash: |
+      echo "check git settings"
+      echo build dir $(Build.Repository.LocalPath)
+      echo build srouce dir : $(Build.SourcesDirectory)
+      echo staging dir: $(Build.StagingDirectory)
+
+      git status
+      #git config user.name "marc modin"
+
+      echo "the branch from build :" $(Build.SourceBranchName)
+      git checkout $(Build.SourceBranchName)
+      git stash
+      #git commit -a --allow-empty -m '$(Build.SourceBranchName)'
+
+      echo check current branch 
+      git checkout master
+      git ls-a -a
+      #git branch build
+      #git checkout build
+      echo about to push to $(Build.Repository.Name)
+      #git push --set-upstream origin HEAD:build
+
+    env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)

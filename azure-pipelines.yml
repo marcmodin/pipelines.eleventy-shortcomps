@@ -17,10 +17,11 @@ steps:
       versionSpec: "9.x"
     displayName: "Install Node.js"
 
-  - script: npm install --save-dev
+  - script: |
+      npm install --save-dev
     displayName: "npm install"
-
-  - script: npm run build
+  - script: |
+      npm run build
     displayName: "run build"
     
   - bash: |
@@ -28,16 +29,17 @@ steps:
       echo "check git settings"
       git config user.name "marc modin"
       echo fetch from origin again
-      git fetch origin
+      git fetch
       # Build Sources Directory is /home/vsts/work/1/s
       echo here we should stage docs at: $(Build.Repository.LocalPath)
       echo build dir is at : $(Build.SourcesDirectory)
+      dir
       echo creating a new build branch
       git checkout -b build
       
       echo add all new files to branch
       git add -A
-      git commit -a --allow-empty -m 'committing build '
+      git commit -a --allow-empty -m 'committing build'
       
       echo git fetch and diff 
       
@@ -48,9 +50,8 @@ steps:
       #git branch build
       #git checkout build
       #echo about to push to $(Build.Repository.Name)
-      git push
+      git push --set-upstream origin HEAD:build
       git checkout master
-
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
       
@@ -67,4 +68,3 @@ steps:
 #   - task: PublishBuildArtifacts@1
 #     inputs:
 #       PathtoPublish: "$(Build.ArtifactStagingDirectory)"
-

@@ -29,7 +29,7 @@ steps:
       echo "check git settings"
       git config user.name "marc modin"
       echo fetch from origin again
-      git pull origin
+      git pull origin master
       # Build Sources Directory is /home/vsts/work/1/s
       echo here we should stage docs at: $(Build.Repository.LocalPath)
       echo build dir is at : $(Build.SourcesDirectory)

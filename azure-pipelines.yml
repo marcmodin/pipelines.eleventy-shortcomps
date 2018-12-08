@@ -38,7 +38,7 @@ steps:
       git checkout -b build
       
       echo add all new files to branch
-      git add -A
+      git add .
       git commit -a --allow-empty -m 'committing build'
       
       echo git fetch and diff 

@@ -50,7 +50,7 @@ steps:
       #git branch build
       #git checkout build
       #echo about to push to $(Build.Repository.Name)
-      git push --set-upstream origin build
+      git push
       git checkout master
 
     env:

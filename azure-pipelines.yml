@@ -20,7 +20,7 @@ steps:
   - script: npm install --save-dev
     displayName: "npm install"
 
-  - script: npm run build
+  - script: | npm run build
     displayName: "run build"
     
   - bash: |

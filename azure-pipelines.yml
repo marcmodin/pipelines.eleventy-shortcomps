@@ -17,12 +17,10 @@ steps:
       versionSpec: "9.x"
     displayName: "Install Node.js"
 
-  - script: |
-      npm install --save-dev
+  - script: npm install --save-dev
     displayName: "npm install"
 
-  - script: |
-      npm run build
+  - script: npm run build
     displayName: "run build"
     
   - bash: |

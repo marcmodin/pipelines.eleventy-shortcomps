@@ -3,7 +3,7 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 trigger:
-  - build
+  - build/**
 
 pool:
   vmImage: "ubuntu-16.04"
@@ -40,7 +40,7 @@ steps:
       echo add all new files to branch
       git add -A
       git add _docs/**
-      git commit -a --allow-empty -m '$(git log build -1 --pretty=%B)'
+      git commit -a --allow-empty -m "$(git log build -1 --pretty=%B)"
 
       echo the git diff and status :  
 
@@ -49,7 +49,7 @@ steps:
 
       echo about to push to $(Build.Repository.Name)
       #git push --set-upstream origin HEAD:build
-      #git push origin master
+      git push origin master
 
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)

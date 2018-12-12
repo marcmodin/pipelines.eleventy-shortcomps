@@ -3,11 +3,11 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 trigger:
-- master
-- build
+# - master
+# - build
 
 pool:
-  vmImage: "ubuntu-16.04"
+  vmImage: "vs2017-win2016"
 
 steps:
   - checkout: self
@@ -25,8 +25,10 @@ steps:
   
       echo "checking git settings"
       git config user.name "marc modin"
-      
-      # Build Sources Directory should be /home/vsts/work/1/s
+
+      echo fetch from origin again
+      git pull origin master
+      # Build Sources Directory is /home/vsts/work/1/s
       echo here we should stage docs at: $(Build.Repository.LocalPath)
       dir
       

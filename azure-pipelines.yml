@@ -22,7 +22,7 @@ steps:
     
   - bash: |
   
-      echo "checking git settings"
+      echo "setting git creds"
       git config user.name "marc modin"
       
       # Build Sources Directory should be /home/vsts/work/1/s

@@ -39,7 +39,7 @@ steps:
 
       echo add all new files to branch
       git add --all
-      git add _docs/**
+      git add docs/**
       git commit -a --allow-empty -m "$(Build.SourceVersion)"
 
       echo the git diff and status :  

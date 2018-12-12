@@ -5,7 +5,7 @@
   "scripts": {
     "start": "eleventy --serve",
     "build": "eleventy",
-    "clean": "rimraf _docs",
+    "clean": "rimraf docs",
     "dry": "eleventy  --dryrun",
     "debug": "DEBUG=Eleventy* eleventy"
   },

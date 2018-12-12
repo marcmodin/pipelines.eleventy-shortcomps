@@ -39,7 +39,7 @@ steps:
       git pull origin master
       
       echo add all new files to branch
-      git add -fA
+      git add -A
       git commit -a --allow-empty -m '$(git log build -1 --pretty=%B)'
       
       echo the git diff and status :  

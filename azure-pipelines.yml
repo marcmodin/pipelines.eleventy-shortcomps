@@ -39,6 +39,7 @@ steps:
 
       echo add all new files to branch
       git add -A
+      git add _docs/**
       git commit -a --allow-empty -m '$(git log build -1 --pretty=%B)'
 
       echo the git diff and status :  

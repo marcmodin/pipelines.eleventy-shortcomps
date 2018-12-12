@@ -19,7 +19,7 @@ module.exports = function(config) {
   return {
     dir: {
       input: inputDir,
-      output: "docs"
+      output: "_docs"
     }
   };
 };

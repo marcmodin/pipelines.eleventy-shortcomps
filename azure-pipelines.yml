@@ -3,8 +3,7 @@
 # Add steps that analyze code, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 trigger:
-- master
-- build
+  - build
 
 pool:
   vmImage: "ubuntu-16.04"
@@ -16,44 +15,44 @@ steps:
   - script: |
       npm install --save-dev
     displayName: "npm install"
-    
+
   - script: |
-      npm run build
+      npm run clean & npm run build
     displayName: "run build"
-    
+
   - bash: |
-  
+
       echo "checking git settings"
       git config user.name "marc modin"
-      
+
       # Build Sources Directory should be /home/vsts/work/1/s
       echo here we should stage docs at: $(Build.Repository.LocalPath)
       dir
-      
+
       echo checking branches
       # git checkout -b build
       git branch
-      
+
       echo and checking out master
       git checkout master
       git pull origin master
-      
+
       echo add all new files to branch
-      git add -fA
+      git add -A
       git commit -a --allow-empty -m '$(git log build -1 --pretty=%B)'
-      
+
       echo the git diff and status :  
-      
+
       git diff
       git status
-      
+
       echo about to push to $(Build.Repository.Name)
       #git push --set-upstream origin HEAD:build
-      git push origin master
-      
+      #git push origin master
+
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-      
+
 #   - task: CopyFiles@2
 #     displayName: "Copy Files to: $(Build.ArtifactStagingDirectory)"
 #     inputs:

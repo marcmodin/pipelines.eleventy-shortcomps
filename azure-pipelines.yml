@@ -27,15 +27,10 @@ steps:
 
       # Build Sources Directory should be /home/vsts/work/1/s
       echo here we should stage docs at: $(Build.Repository.LocalPath)
-      dir
 
-      echo checking branches
-      # git checkout -b build
-      git branch
-
-      echo and checking out master
-      git checkout master
-      git pull origin master
+      echo and checking out build
+      git checkout build
+      git pull origin build
 
       echo add all new files to branch
       git add --all
@@ -49,11 +44,10 @@ steps:
 
       echo about to push to $(Build.Repository.Name)
       #git push --set-upstream origin HEAD:build
-      git push origin master
+      git push origin build
 
     env:
       SYSTEM_ACCESSTOKEN: $(System.AccessToken)
-
 #   - task: CopyFiles@2
 #     displayName: "Copy Files to: $(Build.ArtifactStagingDirectory)"
 #     inputs:

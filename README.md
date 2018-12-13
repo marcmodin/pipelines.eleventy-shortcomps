@@ -1,139 +1,39 @@
-# eleventy-shortcomps
+# Eleventy Static Site Generator Test
 
-Starter project for static site, using [Eleventy](https://11ty.io) and shortcode components (AKA _shortcomps_) pattern.
+This repo is my attempt to test out Azure Pipelines to build static content from pull requests.
 
-## Goal
+---
 
-The ability to create and maintain reusable, framework-agnostic [functional stateless components](https://javascriptplayground.com/functional-stateless-components-react/).
+[![Build Status](https://dev.azure.com/marcmodin/pipelines.eleventy-shortcomps/_apis/build/status/marcmodin.pipelines.eleventy-shortcomps?branchName=build)](https://dev.azure.com/marcmodin/pipelines.eleventy-shortcomps/_build/latest?definitionId=3?branchName=build)
 
-These can be used throughout static sites and/or in environments already utilising frameworks (e.g. React, Vue). They are composable, and serve as the single source of truth across all applications.
+## Cloned from eleventy-shortcomps
 
-Benefit from the advantages of the component model, without needing to reach for a framework right away.
+Eleventy-Shortcomps Starter project for static site, using [Eleventy](https://11ty.io) and shortcode components (AKA _shortcomps_) pattern.
 
-## Concept
+## Steps Taken
 
-As in many frameworks, components can be written as functions that return JavaScript Template Literals. These receive and interpolate any values passed as arguments, and can contain rendering logic:
+1. create a pipeline project on Azure Devops [Azure Devops](https://azure.microsoft.com/en-us/services/devops/)
 
-```JavaScript
-// Button.js
-module.exports = (text, href, primary) => {
+2. Configure Azure Pipelines to use your Git repo. [Get Started](https://docs.microsoft.com/en-us/azure/devops/pipelines/get-started-yaml?view=vsts)
 
-  // rendering logic, classnames etc.?
-  const primaryClass = primary ? 'button--primary' : '';
+3. Follow the wizard to commit the YAML config file to your repo
 
-  return `
-    <a class="button ${ primaryClass }" href="${ href }">
-      ${ text }
-    </a>
-  `;
-};
-```
+4. Create your build project or clone this repo locally
 
-Import and define components using Eleventy’s `addShortcode` and `addPairedShortcode` config methods, as needed:
+## Git Workflow
 
-```JavaScript
-// .eleventy.js
-const componentsDir = `./_includes/components`;
+I use the following git workflow to push changes and automatically build and push the created content to `docs` folder on the master branch.
 
-const Wrapper = require(`${ componentsDir }/Wrapper.js`);
-const Card = require(`${ componentsDir }/Card.js`);
-const Button = require(`${ componentsDir }/Button.js`);
+- Always branch off the build-branch
+- Push the feature-branch commits
+- Create pull-requests to the build-branch
+- This fires off the Pipeline Build which pushes the generated docs back onto the build-branch
+- Merge and Delete feature-branch
+- Create a pull-request from build-branch to the master-branch
+- Merge commits
 
-module.exports = function (config) {
+## Further Steps
 
-  config.addPairedShortcode('Wrapper', Wrapper);
-  config.addShortcode('Card', Card);
-  config.addShortcode('Button', Button);
-
-};
-```
-
-They’ll then be available throughout templates, using the include syntax (i.e. Nunjucks):
-
-```HTML
-{% Button 'This is a link to Eleventy', 'http://11ty.io' %}
-```
-
-And can be nested within other components:
-
-```JavaScript
-// Card.js
-const Button = require('./Button.js');
-
-module.exports = (name, bio, url) => (`
-  <article class="card">
-    <h3>${ name }</h3>
-    <p>${ bio }</p>
-    
-    ${ Button('Visit site', url) }
-  </article>
-`);
-```
-
-## Props variation
-
-Developers coming from (or possibly heading towards) a framework-based component model might be used to passing and receiving their component parameters in a single `props` object.
-
-It’s an elegant way of saying, “Hey, component, here’s everything you’ll need in one tasty little package.”
-
-This commonly results in a functional component that looks more like:
-
-```JavaScript
-// Image.js
-module.exports = ({ src, altText = '', caption = '' }) => (`
-  <figure class="media">
-    <img src="${ src }" alt="${ altText }">
-    ${ caption && `
-      <figcaption>${ caption }</figcaption>
-    `}
-  </figure>
-`);
-```
-
-(See React’s [Functional and class components](https://reactjs.org/docs/components-and-props.html#functional-and-class-components) documentation)
-
-This single `props` argument can also be [destructured](https://davidwalsh.name/destructuring-function-arguments) and assigned [default parameter values](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters). Awesome.
-
-_Note:_ The example above uses the [logical AND operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Description) to add conditional rendering logic for the `<figcaption>`. Ensure props have default values set to avoid this rendering a value of `false` in compiled templates.
-
-With this approach, we still declare our shortcodes in `.eleventy.js` as we did previously. But instead of passing multiple parameters to them in our templates, we pass a single object containing all of the properties. In a templating language like Nunjucks, that might look like:
-
-```HTML
-{% Image {
-  src: '/path/to/image.jpg',
-  altText: 'The Beatles on stage at Shea Stadium',
-  caption: 'Where’s Ringo?'
-} %}
-```
-
-Or, if you’re using a functional component inside another component, that could start to look a whole lot like those React’y components:
-
-```JavaScript
-// SomeComponent.js
-const Image = require('./Image.js');
-
-module.exports = (props = {}) => {
-  const { image } = props;
-
-  return `
-    <div class="some-component">
-      ${ Image({
-        src: image.src,
-        altText: image.altText,
-        caption: image.caption
-      }) }
-    </div>
-  `;
-
-};
-```
-
-It seems advantageous to use this `props` approach in favour of the multiple parameter approach outlined first. Our components will benefit from having the same functional signatures as their React (and to some degree, Vue) counterparts, should we need to take them there in the future.
-
-## Demo
-
-This repo contains just enough to demonstrate how one _could_ utilise this pattern (config, functional stateless components, props, shortcodes, paired shortcodes, layouts).
-
-Site can be viewed at: [eleventy-shortcomps.netlify.com](https://eleventy-shortcomps.netlify.com)
+**Currently working on this README**
 
 Feedback welcome 🙌
